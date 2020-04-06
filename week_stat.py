@@ -5,6 +5,17 @@ from matplotlib import pyplot as plt
 from week_logger import WeeklyWorkHour, DailyWorkHour
 
 
+def autolabel(fig, rects):
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        fig.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', help='Path of the saved data.', default='work_hour.bin')
@@ -45,18 +56,20 @@ if __name__ == '__main__':
         daily_goal_achieved.append("red" if hours_today < args.daily_goal else "green")
 
     plt.figure("Statistics")
-    plt.subplot(211)
-    plt.bar(['W %d' % (t + 1) for t in list(range(len(weekly_work_hours)))],
+    fig = plt.subplot(211)
+    bars = plt.bar(['W %d' % (t + 1) for t in list(range(len(weekly_work_hours)))],
             weekly_work_hours, color=weekly_goal_achieved)
+    autolabel(fig, bars)
     plt.hlines(args.weekly_goal, -2, args.previous_weeks, label='Goal', color='blue')
     plt.legend(loc='lower left')
     plt.ylabel('Weekly Hours')
     plt.grid(True)
-    plt.subplot(212)
-    plt.bar(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], daily_work_hours, color=daily_goal_achieved)
+    fig = plt.subplot(212)
+    bars = plt.bar(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], daily_work_hours, color=daily_goal_achieved)
     plt.hlines(args.daily_goal, -2, 7, label='Goal', color='blue')
     plt.legend(loc='lower left')
     plt.ylabel('Daily Hours')
     plt.grid(True)
+    autolabel(fig, bars)
     plt.show()
     pass
