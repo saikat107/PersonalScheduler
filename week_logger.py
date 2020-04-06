@@ -138,14 +138,17 @@ def log(*messages, debug=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--save', help='Path of the file to save data.', default='work_hour.bin')
     parser.add_argument('--polling_interval', help='Interval of polling (in minutes),', default=5)
     parser.add_argument('--no_daily_notification', action='store_true')
     parser.add_argument('--no_weekly_notification', action='store_true')
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--interval_notification', action='store_true')
     args = parser.parse_args()
-    save_path = args.save
+
+    save_dir = os.path.join(os.environ['HOME'], '.work_logger')
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+    save_path = os.path.join(save_dir, 'log.bin')
     notify2.init('Work Logger')
 
     if os.path.exists(save_path):
@@ -163,6 +166,8 @@ if __name__ == '__main__':
         weeks_data.append(current_week)
 
     while True:
+        save_data(weeks_data, save_path)
+        log('Data saved to ', save_path)
         time.sleep(args.polling_interval * 60)
         if check_screen_on():
             try:
@@ -183,6 +188,4 @@ if __name__ == '__main__':
                     current_week.get_summary() +
                     ' Today : %0.3f hours' % current_week.get_day_work_hour().get_total_time()
                 )
-            save_data(weeks_data, save_path)
-        log('Data saved to ', save_path)
         pass

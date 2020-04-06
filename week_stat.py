@@ -2,7 +2,7 @@ import os
 import argparse
 import pickle
 from matplotlib import pyplot as plt
-from test import WeeklyWorkHour, DailyWorkHour
+from week_logger import WeeklyWorkHour, DailyWorkHour
 
 
 if __name__ == '__main__':
@@ -14,7 +14,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    fp = open(args.data, 'rb')
+    save_dir = os.path.join(os.environ['HOME'], '.work_logger')
+    save_path = os.path.join(save_dir, 'log.bin')
+    fp = open(save_path, 'rb')
     weeks_data = pickle.load(fp)
     fp.close()
     weekly_work_hours = []
