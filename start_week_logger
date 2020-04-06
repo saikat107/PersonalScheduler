@@ -1,2 +1,10 @@
 #!/bin/bash
-python week_logger.py
+
+if  ps aux| grep -e '[p]ython week_logger.py';
+then
+  echo 'Already Running';
+else
+  python week_logger.py
+fi
+
+#
