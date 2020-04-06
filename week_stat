@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python week_stat.py --weekly_goal 70 --daily_goal 10
