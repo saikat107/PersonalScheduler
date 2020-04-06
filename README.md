@@ -2,7 +2,7 @@
 
 ------
 
-This is a simple work logger. This is implemented based on polling the screen. If the computer screen is on, we assumed the user is working. If the scheduler is running, beginning of every day (12.00 am) and beginning of every week, it will send a desktop notification.
+This is a simple work logger. This is implemented based on polling the screen. If the computer screen is on, we assumed the user is working. If the scheduler is running, beginning of every day (12.00 am) and beginning of every week, it will send a desktop notification. This tool is tested on Ubuntu 18.04.
   
 
 ### Requirements
