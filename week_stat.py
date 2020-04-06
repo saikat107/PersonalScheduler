@@ -9,7 +9,7 @@ def autolabel(fig, rects):
     """Attach a text label above each bar in *rects*, displaying its height."""
     for rect in rects:
         height = rect.get_height()
-        fig.annotate('{}'.format(height),
+        fig.annotate('%.2f' % height,
                     xy=(rect.get_x() + rect.get_width() / 2, height),
                     xytext=(0, 3),  # 3 points vertical offset
                     textcoords="offset points",
