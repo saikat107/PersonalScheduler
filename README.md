@@ -1,6 +1,6 @@
 # Self Scheduler for Work From Home. 
 
-_______
+------
 
 This is a simple work logger. This is implemented based on polling the screen. If the computer screen is on, we assumed the user is working. If the scheduler is running, beginning of every day (12.00 am) and beginning of every week, it will send a desktop notification.
   
@@ -30,6 +30,6 @@ Install this tool
 1. Run ``start_logger`` to start the logger. (N.B. if the logger is already running, it will not create another logger.)
 2. To see the statistics, run ``work_stat``. 
 
-_________________________
+---
 
 #### Feel free to fork and report any issue. 
