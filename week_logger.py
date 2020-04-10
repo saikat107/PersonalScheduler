@@ -4,9 +4,10 @@ import notify2
 import pickle
 import argparse
 
-from logger_util import WeeklyWorkHour, DailyWorkHour
-from logger_util_func import check_screen_on, send_notification, save_data, check_beginning_of_hour, log
-from week_stat import main as _week_stat
+from logger_util import WeeklyWorkHour, DailyWorkHour, check_screen_on, send_notification, save_data, \
+    check_beginning_of_hour, log
+
+# from week_stat import main as _week_stat
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -58,7 +59,7 @@ if __name__ == '__main__':
                 log(current_week.get_summary(), debug=args.debug)
             except ValueError:
                 if not args.no_weekly_notification:
-                    _week_stat(5, 40, 8)
+                    # _week_stat(5, 40, 8)
                     send_notification(
                         name='Weekly Work Hours!',
                         message=current_week.get_summary()
@@ -71,7 +72,7 @@ if __name__ == '__main__':
                     'Today : %0.3f hours' \
                     % current_week.get_day_work_hour().get_total_time()
                     )
-                _week_stat(5, 40, 8)
+                # _week_stat(5, 40, 8)
                 send_notification(
                     'Beginning of hour ',
                     current_week.get_summary() +
