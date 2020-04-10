@@ -100,7 +100,7 @@ class WeeklyWorkHour:
             return total_minutes
 
     def get_summary(self):
-        return 'Total work in this week %0.3f hours!' % self.get_total_time()
+        return 'This week %0.3f' % self.get_total_time()
 
 
 def check_screen_on():
