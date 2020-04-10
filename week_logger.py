@@ -29,9 +29,11 @@ if __name__ == '__main__':
         weeks_data = pickle.load(fp)
         for w in weeks_data:
             if not hasattr(w, 'daily_notification'):
-                setattr(w, 'daily_notification', True)
+                setattr(w, 'daily_notification', not args.no_daily_notification)
             if not hasattr(w, 'interval_notification'):
-                setattr(w, 'interval_notification', True)
+                setattr(w, 'interval_notification', args.interval_notification)
+            w.daily_notification = not args.no_daily_notification
+            w.interval_notification = args.interval_notification
         fp.close()
         log('Total weeks available ', len(weeks_data))
         current_week = weeks_data[-1]
@@ -40,7 +42,10 @@ if __name__ == '__main__':
     else:
         weeks_data = []
         log('Created New Week Data')
-        current_week = WeeklyWorkHour()
+        current_week = WeeklyWorkHour(
+            daily_notification=(not args.not_daily_notification),
+            interval_notification=args.inteval_notification
+        )
         weeks_data.append(current_week)
 
     while True:
